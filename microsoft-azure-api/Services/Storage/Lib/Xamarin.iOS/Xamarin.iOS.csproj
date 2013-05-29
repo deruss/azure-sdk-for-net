@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E6C67DD9-DCAA-4DC3-B7EA-49708CD3BEAD}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Microsoft.WindowsAzure.Storage</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;DN40CP;DNCP;XAMIOS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="..\DotNetCommon\ICancellableAsyncResult.cs">
+      <Link>ICancellableAsyncResult.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Auth\Protocol\IAuthenticationHandler.cs">
+      <Link>Auth\Protocol\IAuthenticationHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Auth\Protocol\NoOpAuthenticationHandler.cs">
+      <Link>Auth\Protocol\NoOpAuthenticationHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Auth\Protocol\SharedKeyAuthenticationHandler.cs">
+      <Link>Auth\Protocol\SharedKeyAuthenticationHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Auth\Protocol\SharedKeyLiteAuthenticationHandler.cs">
+      <Link>Auth\Protocol\SharedKeyLiteAuthenticationHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\BlobReadStream.cs">
+      <Link>Blob\BlobReadStream.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\BlobWriteStream.cs">
+      <Link>Blob\BlobWriteStream.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\CloudBlobClient.cs">
+      <Link>Blob\CloudBlobClient.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\CloudBlobContainer.cs">
+      <Link>Blob\CloudBlobContainer.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\CloudBlobDirectory.cs">
+      <Link>Blob\CloudBlobDirectory.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\CloudBlobSharedImpl.cs">
+      <Link>Blob\CloudBlobSharedImpl.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\CloudBlockBlob.cs">
+      <Link>Blob\CloudBlockBlob.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\CloudPageBlob.cs">
+      <Link>Blob\CloudPageBlob.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\ICloudBlob.cs">
+      <Link>Blob\ICloudBlob.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\Protocol\BlobHttpResponseParsers.cs">
+      <Link>Blob\Protocol\BlobHttpResponseParsers.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\Protocol\BlobHttpWebRequestFactory.cs">
+      <Link>Blob\Protocol\BlobHttpWebRequestFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\Protocol\ContainerHttpResponseParsers.cs">
+      <Link>Blob\Protocol\ContainerHttpResponseParsers.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Blob\Protocol\ContainerHttpWebRequestFactory.cs">
+      <Link>Blob\Protocol\ContainerHttpWebRequestFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Auth\CanonicalizationHelper.cs">
+      <Link>Core\Auth\CanonicalizationHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Auth\ICanonicalizer.cs">
+      <Link>Core\Auth\ICanonicalizer.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Auth\SharedKeyCanonicalizer.cs">
+      <Link>Core\Auth\SharedKeyCanonicalizer.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Auth\SharedKeyLiteTableCanonicalizer.cs">
+      <Link>Core\Auth\SharedKeyLiteTableCanonicalizer.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Executor\Executor.cs">
+      <Link>Core\Executor\Executor.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Executor\RecoveryActions.cs">
+      <Link>Core\Executor\RecoveryActions.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Executor\TableCommand.cs">
+      <Link>Core\Executor\TableCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Executor\TableExecutor.cs">
+      <Link>Core\Executor\TableExecutor.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Util\APMWithTimeout.cs">
+      <Link>Core\Util\APMWithTimeout.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Util\AsyncSemaphore.cs">
+      <Link>Core\Util\AsyncSemaphore.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Util\AsyncStreamCopier.cs">
+      <Link>Core\Util\AsyncStreamCopier.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Util\ChainedAsyncResult.cs">
+      <Link>Core\Util\ChainedAsyncResult.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Util\NativeMD5.cs">
+      <Link>Core\Util\NativeMD5.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Core\Util\StorageCommandAsyncResult.cs">
+      <Link>Core\Util\StorageCommandAsyncResult.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Queue\CloudQueue.cs">
+      <Link>Queue\CloudQueue.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Queue\CloudQueueClient.cs">
+      <Link>Queue\CloudQueueClient.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Queue\CloudQueueMessage.cs">
+      <Link>Queue\CloudQueueMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Queue\Protocol\QueueHttpResponseParsers.cs">
+      <Link>Queue\Protocol\QueueHttpResponseParsers.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Queue\Protocol\QueueHttpWebRequestFactory.cs">
+      <Link>Queue\Protocol\QueueHttpWebRequestFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Shared\Protocol\HttpResponseParsers.cs">
+      <Link>Shared\Protocol\HttpResponseParsers.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Shared\Protocol\HttpWebRequestFactory.cs">
+      <Link>Shared\Protocol\HttpWebRequestFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Shared\Protocol\WebRequestExtensions.cs">
+      <Link>Shared\Protocol\WebRequestExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Table\DataServices\TableServiceContext.cs">
+      <Link>Table\DataServices\TableServiceContext.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Table\DataServices\TableServiceEntity.cs">
+      <Link>Table\DataServices\TableServiceEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Table\DataServices\TableServiceExtensions.cs">
+      <Link>Table\DataServices\TableServiceExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Table\DataServices\TableServiceQuery.cs">
+      <Link>Table\DataServices\TableServiceQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Table\Protocol\TableHttpWebRequestFactory.cs">
+      <Link>Table\Protocol\TableHttpWebRequestFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Table\Protocol\TableHttpWebResponseParsers.cs">
+      <Link>Table\Protocol\TableHttpWebResponseParsers.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetCommon\Table\Protocol\TableUtilities.cs">
+      <Link>Table\Protocol\TableUtilities.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\AccessCondition.cs">
+      <Link>AccessCondition.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\CloudStorageAccount.cs">
+      <Link>CloudStorageAccount.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\DoesServiceRequest.cs">
+      <Link>DoesServiceRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\IContinuationToken.cs">
+      <Link>IContinuationToken.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\IRequestOptions.cs">
+      <Link>IRequestOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\OperationContext.cs">
+      <Link>OperationContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\RequestEventArgs.cs">
+      <Link>RequestEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\RequestResult.cs">
+      <Link>RequestResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\ResultSegment.cs">
+      <Link>ResultSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\StorageException.cs">
+      <Link>StorageException.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\StorageExtendedErrorInformation.cs">
+      <Link>StorageExtendedErrorInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Auth\StorageCredentials.cs">
+      <Link>Auth\StorageCredentials.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlobAttributes.cs">
+      <Link>Blob\BlobAttributes.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlobContainerPermissions.cs">
+      <Link>Blob\BlobContainerPermissions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlobContainerProperties.cs">
+      <Link>Blob\BlobContainerProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlobContainerPublicAccessType.cs">
+      <Link>Blob\BlobContainerPublicAccessType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlobContinuationToken.cs">
+      <Link>Blob\BlobContinuationToken.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlobListingDetails.cs">
+      <Link>Blob\BlobListingDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlobProperties.cs">
+      <Link>Blob\BlobProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlobReadStreamBase.cs">
+      <Link>Blob\BlobReadStreamBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlobRequestOptions.cs">
+      <Link>Blob\BlobRequestOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlobResultSegment.cs">
+      <Link>Blob\BlobResultSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlobType.cs">
+      <Link>Blob\BlobType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlobWriteStreamBase.cs">
+      <Link>Blob\BlobWriteStreamBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlockListingFilter.cs">
+      <Link>Blob\BlockListingFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\BlockSearchMode.cs">
+      <Link>Blob\BlockSearchMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\CloudBlobClientBase.cs">
+      <Link>Blob\CloudBlobClientBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\CloudBlobContainerBase.cs">
+      <Link>Blob\CloudBlobContainerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\CloudBlobDirectoryBase.cs">
+      <Link>Blob\CloudBlobDirectoryBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\CloudBlockBlobBase.cs">
+      <Link>Blob\CloudBlockBlobBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\CloudPageBlobBase.cs">
+      <Link>Blob\CloudPageBlobBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\ContainerListingDetails.cs">
+      <Link>Blob\ContainerListingDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\ContainerResultSegment.cs">
+      <Link>Blob\ContainerResultSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\CopyState.cs">
+      <Link>Blob\CopyState.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\CopyStatus.cs">
+      <Link>Blob\CopyStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\DeleteSnapshotsOption.cs">
+      <Link>Blob\DeleteSnapshotsOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\ICloudBlobBase.cs">
+      <Link>Blob\ICloudBlobBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\IListBlobItem.cs">
+      <Link>Blob\IListBlobItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\LeaseAction.cs">
+      <Link>Blob\LeaseAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\LeaseDuration.cs">
+      <Link>Blob\LeaseDuration.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\LeaseState.cs">
+      <Link>Blob\LeaseState.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\LeaseStatus.cs">
+      <Link>Blob\LeaseStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\ListBlockItem.cs">
+      <Link>Blob\ListBlockItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\PageRange.cs">
+      <Link>Blob\PageRange.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\SharedAccessBlobPermissions.cs">
+      <Link>Blob\SharedAccessBlobPermissions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\SharedAccessBlobPolicies.cs">
+      <Link>Blob\SharedAccessBlobPolicies.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\SharedAccessBlobPolicy.cs">
+      <Link>Blob\SharedAccessBlobPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\BlobAccessPolicyResponse.cs">
+      <Link>Blob\Protocol\BlobAccessPolicyResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\BlobContainerEntry.cs">
+      <Link>Blob\Protocol\BlobContainerEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\BlobErrorCodeStrings.cs">
+      <Link>Blob\Protocol\BlobErrorCodeStrings.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\BlobHttpResponseParsersBase.cs">
+      <Link>Blob\Protocol\BlobHttpResponseParsersBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\BlobListingContext.cs">
+      <Link>Blob\Protocol\BlobListingContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\BlobRequest.cs">
+      <Link>Blob\Protocol\BlobRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\ContainerHttpResponseParsersBase.cs">
+      <Link>Blob\Protocol\ContainerHttpResponseParsersBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\GetBlockListResponse.cs">
+      <Link>Blob\Protocol\GetBlockListResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\GetPageRangesResponse.cs">
+      <Link>Blob\Protocol\GetPageRangesResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\IListBlobEntry.cs">
+      <Link>Blob\Protocol\IListBlobEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\ListBlobEntry.cs">
+      <Link>Blob\Protocol\ListBlobEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\ListBlobPrefixEntry.cs">
+      <Link>Blob\Protocol\ListBlobPrefixEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\ListBlobsResponse.cs">
+      <Link>Blob\Protocol\ListBlobsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\ListContainersResponse.cs">
+      <Link>Blob\Protocol\ListContainersResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\PageWrite.cs">
+      <Link>Blob\Protocol\PageWrite.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Blob\Protocol\PutBlockListItem.cs">
+      <Link>Blob\Protocol\PutBlockListItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\CanonicalizedString.cs">
+      <Link>Core\CanonicalizedString.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\NullType.cs">
+      <Link>Core\NullType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\SR.cs">
+      <Link>Core\SR.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\UriQueryBuilder.cs">
+      <Link>Core\UriQueryBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Auth\CanonicalizationHelperBase.cs">
+      <Link>Core\Auth\CanonicalizationHelperBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Auth\SharedAccessSignatureHelper.cs">
+      <Link>Core\Auth\SharedAccessSignatureHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Executor\ExecutionState.cs">
+      <Link>Core\Executor\ExecutionState.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Executor\ExecutorBase.cs">
+      <Link>Core\Executor\ExecutorBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Executor\RESTCommand.cs">
+      <Link>Core\Executor\RESTCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Executor\RequestOptionsExtensions.cs">
+      <Link>Core\Executor\RequestOptionsExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Executor\StorageCommandBase.cs">
+      <Link>Core\Executor\StorageCommandBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Util\AsyncSemaphoreBase.cs">
+      <Link>Core\Util\AsyncSemaphoreBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Util\CommonUtils.cs">
+      <Link>Core\Util\CommonUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Util\CryptoUtility.cs">
+      <Link>Core\Util\CryptoUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Util\Exceptions.cs">
+      <Link>Core\Util\Exceptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Util\General.cs">
+      <Link>Core\Util\General.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Util\HttpUtility.cs">
+      <Link>Core\Util\HttpUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Util\MD5Wrapper.cs">
+      <Link>Core\Util\MD5Wrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Util\NavigationHelper.cs">
+      <Link>Core\Util\NavigationHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Util\StreamDescriptor.cs">
+      <Link>Core\Util\StreamDescriptor.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Core\Util\StreamExtensions.cs">
+      <Link>Core\Util\StreamExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\CloudQueueBase.cs">
+      <Link>Queue\CloudQueueBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\CloudQueueClientBase.cs">
+      <Link>Queue\CloudQueueClientBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\CloudQueueMessageBase.cs">
+      <Link>Queue\CloudQueueMessageBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\MessageUpdateFields.cs">
+      <Link>Queue\MessageUpdateFields.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\QueueMessageType.cs">
+      <Link>Queue\QueueMessageType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\QueueRequestOptions.cs">
+      <Link>Queue\QueueRequestOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\QueueResultSegment.cs">
+      <Link>Queue\QueueResultSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\SharedAccessQueuePermissions.cs">
+      <Link>Queue\SharedAccessQueuePermissions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\SharedAccessQueuePolicies.cs">
+      <Link>Queue\SharedAccessQueuePolicies.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\SharedAccessQueuePolicy.cs">
+      <Link>Queue\SharedAccessQueuePolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\Protocol\GetMessagesResponse.cs">
+      <Link>Queue\Protocol\GetMessagesResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\Protocol\ListQueuesResponse.cs">
+      <Link>Queue\Protocol\ListQueuesResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\Protocol\QueueAccessPolicyResponse.cs">
+      <Link>Queue\Protocol\QueueAccessPolicyResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\Protocol\QueueContinuationToken.cs">
+      <Link>Queue\Protocol\QueueContinuationToken.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\Protocol\QueueEntry.cs">
+      <Link>Queue\Protocol\QueueEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\Protocol\QueueErrorCodeStrings.cs">
+      <Link>Queue\Protocol\QueueErrorCodeStrings.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\Protocol\QueueHttpResponseParsersBase.cs">
+      <Link>Queue\Protocol\QueueHttpResponseParsersBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\Protocol\QueueListingContext.cs">
+      <Link>Queue\Protocol\QueueListingContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\Protocol\QueueListingDetails.cs">
+      <Link>Queue\Protocol\QueueListingDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\Protocol\QueueMessage.cs">
+      <Link>Queue\Protocol\QueueMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\Protocol\QueuePermissions.cs">
+      <Link>Queue\Protocol\QueuePermissions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Queue\Protocol\QueueRequest.cs">
+      <Link>Queue\Protocol\QueueRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\RetryPolicies\ExponentialRetry.cs">
+      <Link>RetryPolicies\ExponentialRetry.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\RetryPolicies\IRetryPolicy.cs">
+      <Link>RetryPolicies\IRetryPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\RetryPolicies\LinearRetry.cs">
+      <Link>RetryPolicies\LinearRetry.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\RetryPolicies\NoRetry.cs">
+      <Link>RetryPolicies\NoRetry.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\AccessPolicyResponseBase.cs">
+      <Link>Shared\Protocol\AccessPolicyResponseBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\Constants.cs">
+      <Link>Shared\Protocol\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\HttpResponseParsersBase.cs">
+      <Link>Shared\Protocol\HttpResponseParsersBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\ListingContext.cs">
+      <Link>Shared\Protocol\ListingContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\LoggingOperations.cs">
+      <Link>Shared\Protocol\LoggingOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\LoggingProperties.cs">
+      <Link>Shared\Protocol\LoggingProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\MetricsLevel.cs">
+      <Link>Shared\Protocol\MetricsLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\MetricsProperties.cs">
+      <Link>Shared\Protocol\MetricsProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\Request.cs">
+      <Link>Shared\Protocol\Request.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\Response.cs">
+      <Link>Shared\Protocol\Response.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\ResponseParsingBase.cs">
+      <Link>Shared\Protocol\ResponseParsingBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\ServiceProperties.cs">
+      <Link>Shared\Protocol\ServiceProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Shared\Protocol\StorageErrorCodeStrings.cs">
+      <Link>Shared\Protocol\StorageErrorCodeStrings.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\CloudTableBase.cs">
+      <Link>Table\CloudTableBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\CloudTableClientBase.cs">
+      <Link>Table\CloudTableClientBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\DynamicTableEntity.cs">
+      <Link>Table\DynamicTableEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\EdmType.cs">
+      <Link>Table\EdmType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\EntityProperty.cs">
+      <Link>Table\EntityProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\EntityReadFlags.cs">
+      <Link>Table\EntityReadFlags.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\EntityResolver.cs">
+      <Link>Table\EntityResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\EntityUtilities.cs">
+      <Link>Table\EntityUtilities.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\ITableEntity.cs">
+      <Link>Table\ITableEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\QueryComparisons.cs">
+      <Link>Table\QueryComparisons.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\SharedAccessTablePermissions.cs">
+      <Link>Table\SharedAccessTablePermissions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\SharedAccessTablePolicies.cs">
+      <Link>Table\SharedAccessTablePolicies.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\SharedAccessTablePolicy.cs">
+      <Link>Table\SharedAccessTablePolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableBatchOperationBase.cs">
+      <Link>Table\TableBatchOperationBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableContinuationToken.cs">
+      <Link>Table\TableContinuationToken.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableEntity.cs">
+      <Link>Table\TableEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableOperationBase.cs">
+      <Link>Table\TableOperationBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableOperationType.cs">
+      <Link>Table\TableOperationType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableOperators.cs">
+      <Link>Table\TableOperators.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TablePermissions.cs">
+      <Link>Table\TablePermissions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableQueryBase.cs">
+      <Link>Table\TableQueryBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableQueryGenericBase.cs">
+      <Link>Table\TableQueryGenericBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableQuerySegment.cs">
+      <Link>Table\TableQuerySegment.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableRequestOptions.cs">
+      <Link>Table\TableRequestOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableResult.cs">
+      <Link>Table\TableResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableResultSegment.cs">
+      <Link>Table\TableResultSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\TableServiceTable.cs">
+      <Link>Table\TableServiceTable.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\Protocol\TableAccessPolicyResponse.cs">
+      <Link>Table\Protocol\TableAccessPolicyResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\Protocol\TableConstants.cs">
+      <Link>Table\Protocol\TableConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\Protocol\TableErrorCodeStrings.cs">
+      <Link>Table\Protocol\TableErrorCodeStrings.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Table\Protocol\TableRequest.cs">
+      <Link>Table\Protocol\TableRequest.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\DotNetCommon\Core\.DS_Store">
+      <Link>Core\.DS_Store</Link>
+    </None>
+    <None Include="..\DotNetCommon\Dependencies\Microsoft.Data.Edm.dll">
+      <Link>Dependencies\Microsoft.Data.Edm.dll</Link>
+    </None>
+    <None Include="..\DotNetCommon\Dependencies\Microsoft.Data.Edm.xml">
+      <Link>Dependencies\Microsoft.Data.Edm.xml</Link>
+    </None>
+    <None Include="..\DotNetCommon\Dependencies\Microsoft.Data.OData.dll">
+      <Link>Dependencies\Microsoft.Data.OData.dll</Link>
+    </None>
+    <None Include="..\DotNetCommon\Dependencies\Microsoft.Data.OData.xml">
+      <Link>Dependencies\Microsoft.Data.OData.xml</Link>
+    </None>
+    <None Include="..\DotNetCommon\Dependencies\System.Spatial.dll">
+      <Link>Dependencies\System.Spatial.dll</Link>
+    </None>
+    <None Include="..\DotNetCommon\Dependencies\System.Spatial.xml">
+      <Link>Dependencies\System.Spatial.xml</Link>
+    </None>
+  </ItemGroup>
+</Project>

@@ -42,16 +42,18 @@ namespace Microsoft.WindowsAzure.Storage.Core.Util
 
 #if RT
         private CryptographicHash hash = null;
-#elif !COMMON
+#elif !COMMON && !XAMIOS
         private MD5 hash = null;
         private NativeMD5 nativeMD5Hash = null;
+#elif XAMIOS
+		private MD5 hash = null;
 #endif
 
         internal MD5Wrapper()
         {
 #if RT
             this.hash = HashAlgorithmProvider.OpenAlgorithm("MD5").CreateHash();
-#elif DNCP 
+#elif DNCP && !XAMIOS
             if (this.version1MD5)
             {
                 this.hash = MD5.Create();
@@ -60,6 +62,8 @@ namespace Microsoft.WindowsAzure.Storage.Core.Util
             {
                 this.nativeMD5Hash = NativeMD5.Create();
             }
+#elif XAMIOS
+			this.hash = new MD5CryptoServiceProvider();
 #endif
         }
 
@@ -75,7 +79,7 @@ namespace Microsoft.WindowsAzure.Storage.Core.Util
             {
 #if RT
                 this.hash.Append(input.AsBuffer(offset, count));
-#elif DNCP
+#elif DNCP && !XAMIOS
                 if (this.version1MD5)
                 {
                     this.hash.TransformBlock(input, offset, count, null, 0);
@@ -84,6 +88,8 @@ namespace Microsoft.WindowsAzure.Storage.Core.Util
                 {
                     this.nativeMD5Hash.TransformBlock(input, offset, count);
                 }
+#elif XAMIOS
+				this.hash.TransformBlock(input, offset, count, null, 0);
 #endif
             }
         }
@@ -99,7 +105,7 @@ namespace Microsoft.WindowsAzure.Storage.Core.Util
             return CryptographicBuffer.EncodeToBase64String(md5HashBuff);
 #elif COMMON
             return null;
-#elif DNCP
+#elif DNCP && !XAMIOS
             byte[] bytes;
             if (this.version1MD5)
             {
@@ -113,6 +119,11 @@ namespace Microsoft.WindowsAzure.Storage.Core.Util
 
             // Convert hash to string
             return Convert.ToBase64String(bytes);
+#elif XAMIOS
+			this.hash.TransformFinalBlock(new byte[0], 0, 0);
+			byte[] bytes = this.hash.Hash;
+
+			return Convert.ToBase64String(bytes);
 #endif
         }
 
@@ -130,7 +141,7 @@ namespace Microsoft.WindowsAzure.Storage.Core.Util
 #elif COMMON
             return null;
 
-#elif DNCP 
+#elif DNCP && !XAMIOS
             byte[] bytes;
 
             if (this.version1MD5)
@@ -146,6 +157,11 @@ namespace Microsoft.WindowsAzure.Storage.Core.Util
 
                 // Convert hash to string
                 return Convert.ToBase64String(bytes);
+#elif XAMIOS
+			byte[] bytes;
+			int length = (int)memoryStream.Length;
+			bytes = this.hash.TransformFinalBlock(memoryStream.ToArray(), 0, 0);
+			return Convert.ToBase64String(bytes);
 #endif
         }
 
@@ -154,7 +170,7 @@ namespace Microsoft.WindowsAzure.Storage.Core.Util
         {
 #if RT
             this.hash = null;
-#else
+#elif !XAMIOS
             if (!this.version1MD5)
             {
                 if (this.nativeMD5Hash != null)
@@ -167,6 +183,8 @@ namespace Microsoft.WindowsAzure.Storage.Core.Util
             {
                 this.hash = null;
             }
+#elif XAMIOS
+			this.hash = null;
 #endif
        }
 #endif
